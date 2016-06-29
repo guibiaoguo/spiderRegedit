@@ -1,0 +1,186 @@
+*{
+    margin:0;
+    padding:0;
+}
+body {
+    font-family: "Microsoft YaHei",Arial;
+    font-size: 14px;
+    color: #788288;
+    background-color: #ebebeb;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.8;
+}
+i,em{
+    font-style: normal;
+}
+.clear{
+    clear: both;
+}
+.header{
+    background: #fff;
+    height: 50px;
+    border-bottom: 2px solid red;
+}
+.header h3{
+    width: 80%;
+    height: 50px;
+    line-height: 50px;
+    color: red;
+    margin:0 auto;
+}
+.search_container{
+    width: 80%;
+    background: #fff;
+    margin: 10px auto;
+    overflow: hidden;
+}
+.search_box{
+    margin:20px;
+}
+.search-nav {
+    font-size: 16px;
+    font-weight: normal;
+    width: 650px;
+}
+.search-nav li {
+    list-style: none;
+    float: left;
+    line-height: 16px;
+    padding: 5px 14px 10px;
+    color:#666;
+    border-radius:2px;
+}
+.search-nav li.active {
+    border-bottom: 2px solid red;
+    color: #666;
+    position: relative;
+}
+.search-nav li.active:before {
+    content: " ";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0px;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-bottom:6px solid red;
+    left: 50%;
+    margin-left: -6px;
+}
+
+.search-type:hover{
+    color: #333;
+    position: relative;
+    border-bottom: 2px solid red;
+}
+.search-type:hover:before {
+    content: " ";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0px;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-bottom:6px solid red;
+    left: 50%;
+    margin-left: -6px;
+}
+
+.search-type {
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+.index-hot{
+    color:#f9f9f9;margin-top:20px;
+}
+.index-hot-company{
+    color: #999;padding: 10px;font-size: 16px;display: inline-block;
+}
+.index-hot-company:hover,.index-hot-company:visited,.index-hot-company:active{
+    color:#666;
+}
+.list_container{
+    width: 80%;
+    margin: 10px auto;
+}
+.list_container .list_tips{
+    margin-top: 30px;
+}
+.list_container .list_tips i{
+    color: red;
+}
+.list_container .list{
+    margin: 10px 0;
+    background: #fff;
+}
+.list_container .list_score em,.list_container .list_score i{
+    display: block;
+    text-align: center;
+}
+.list_container .list_score em{
+    height: 50px;
+    line-height: 50px;
+    font-size:48px;
+    font-weight: bold;
+    color: #d87a80;
+    margin-top: 20px;
+}
+.list_container .list_score i{
+    font-size: 16px;
+}
+.list_container .list .list_con p{
+    margin-bottom: 0px;
+    overflow: hidden;
+}
+.list_container .list .list_con p i{
+    display: inline-block;
+}
+.list_container .list .list_con .list_title{
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+.list_container .list .list_con .list_status{
+    width: 34px;
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    font-size:12px;
+    color:#fff;
+    text-align: center;
+    background: green;
+    border-radius: 3px;
+    margin: 9px 0 0 3px;
+    cursor: pointer;
+}
+.list_container .list .list_con .list_con_1{
+    margin: 14px 0px 10px;
+}
+.list_container .list .list_con .list_con_2 i,.list_container .list .list_con .list_con_3 i{
+    height:16px;
+    line-height: 17px;
+    margin-right: 30px;
+    padding-left: 18px;
+    background: url(../images/icons.png) no-repeat;
+}
+.list_container .list .list_con .list_con_2 .list_name{
+    background-position: 0px 0px;
+}
+.list_container .list .list_con .list_con_2 .list_date{
+    background-position: 0px -16px;
+}
+.list_container .list .list_con .list_con_2 .list_amount{
+    background-position: 0px -32px;
+}
+.list_container .list .list_con .list_con_2 .list_type{
+    background-position: 0px -48px;
+}
+.list_container .list .list_con .list_con_2 .list_people{
+    background-position: 0px -64px;
+}
+.list_container .list .list_con .list_con_3 .list_address{
+    background-position: 0px -80px;
+}
+
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}

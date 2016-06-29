@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>企业年报</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8" style="padding-top: 100px">
+            <h3>企业基本信息</h3>
+            <table class="table table-bordered table-hover" th:if="${['baseInfo']}!=null" th:object="${['baseInfo']}">
+                <thead>
+                </thead>
+                <tbody >
+                <tr>
+                    <td>注册号
+                    </td>
+                    <td th:text="*{[regNumber]}">
+                    </td>
+                    <td>企业名称
+                    </td>
+                    <td th:text="*{[companyName]}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>企业联系电话
+                    </td>
+                    <td th:text="*{[phoneNumber]}">
+                    </td>
+                    <td>邮政编码
+                    </td>
+                    <td th:text="*{[postcode]}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>经营状况
+                    </td>
+                    <td th:text="*{[manageState]}">
+                    </td>
+                    <td>从业人数
+                    </td>
+                    <td th:text="${[employeeNum]}?:未公开">
+                    </td>
+                </tr>
+                <tr>
+                    <td>企业邮箱
+                    </td>
+                    <td th:text="*{[email]}">
+                    </td>
+                    <td>是否有网站或网店
+                    </td>
+                    <td th:text="*{[primeBusProfit]}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>企业通讯地址
+                    </td>
+                    <td th:text="*{[postalAddress]}">
+                    </td>
+                    <td>
+                        企业是否有投资信息
+                        或购买其他公司股权
+                    </td>
+                    <td th:text="*{[retainedProfit]}">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <h3>网站或网店信息</h3>
+            <table class="table table-bordered table-hover" th:if="${[webInfoList]}!=null">
+                <thead>
+                <tr>
+                    <th>网站
+                    </th>
+                    <th>名称</th>
+                    <th>网址</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${[webInfoList]}">
+                    <td th:text="${item['webType']}">
+                    </td>
+                    <td th:text="${item['name']}">
+                    </td>
+                    <td th:text="${item['website']}">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <h3>股东及出资信息</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr >
+                    <th> 股东</th>
+                    <th> 认缴出资额(万元)</th>
+                    <th> 认缴出资时间</th>
+                    <th> 认缴出资方式</th>
+                    <th> 实缴出资额(万元)</th>
+                    <th> 实缴出资时间</th>
+                    <th> 实缴出资方式</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${[shareholderList]}" th:if="${item}!=null">
+                    <td th:text="${item['investorName']}"></td>
+                    <td th:text="${item['subscribeAmount']}"></td>
+                    <td th:text="${item['shubscribeTime']}"></td>
+                    <td th:text="${item['subscribeType']}"></td>
+                    <td th:text="${item['paidAmount']}"></td>
+                    <td th:text="${item['paidTime']}"></td>
+                    <td th:text="${item['paidType']}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--<span>企业资产状况信息</span>-->
+            <!--<table class="table table-bordered table-hover">-->
+                <!--<thead>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <h3>企业变更记录</h3>
+            <table class="table table-bordered table-hover" th:if="${[changeRecordList]}!=null" >
+                <thead>
+                <tr>
+                    <th> 修改日期</th>
+                    <th> 修改事项</th>
+                    <th> 修改前</th>
+                    <th> 修改后</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${[changeRecordList]}">
+                    <td th:text="${item['changeTime']}"></td>
+                    <td th:text="${item['changeItem']}"></td>
+                    <td th:text="${item['contentBefore']}"></td>
+                    <td th:text="${item['contentAfter']}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

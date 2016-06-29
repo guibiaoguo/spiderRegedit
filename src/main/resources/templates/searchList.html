@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>列表</title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="css/searchList.css" rel="stylesheet" type="text/css"/>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap-paginator.js"></script>
+</head>
+<body>
+<div class="header">
+    <h3>企底</h3>
+</div>
+<div class="search_container">
+    <div class="row">
+        <div class="col-md-6 search_box">
+            <form action="/skynet/search">
+                <div class="input-group">
+                    <input type="text" value="" id="keyword" autocomplete="off" placeholder="请输入企业名称、人名、产品名、注册号等"
+                           name="keyword" class="form-control input-lg" required="required"/>
+                    <input type="hidden" id="type" name="type" value="0"/>
+                    <span class="input-group-btn">
+                        <input type="submit" class="button btn btn-danger btn-lg" value="查一下"/>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <!--<p class="index-hot">-->
+
+            <!--<a class="index-hot-company" href="###" target="_blank">百度外卖</a>-->
+
+            <!--<a class="index-hot-company" href="###" target="_blank">饿了么</a>-->
+
+            <!--<a class="index-hot-company" href="###" target="_blank">大麦网</a>-->
+
+            <!--<a class="index-hot-company" href="###" target="_blank">大麦网</a>-->
+
+            <!--</p>-->
+        </div>
+    </div>
+    <div class="search-nav hidden-xs">
+        <ul>
+            <!--<li class="search-type active">全部</li>-->
+            <!--<li class="search-type  ">企业</li>-->
+            <!--<li class="search-type">法人/股东</li>-->
+            <!--<li class="search-type">高管</li>-->
+            <!--<li class="search-type">品牌或产品</li>-->
+            <!--<li class="search-type">地址</li>-->
+            <!--<li class="search-type"> 经营范围</li>-->
+        </ul>
+    </div>
+</div>
+<div class="list_container">
+    <div   class="list_tips">企底为您找到<i><span th:text="${entity['total']}?:0"></span></i>家相关企业</div>
+    <div  id="companyList" class="list" >
+        <div class="row" th:each="company:${entity['data']}" th:if="${company['type']}==1">
+            <div class="col-md-2 list_icon">
+                <a href="companydetail.html" target="_blank"><img src="images/company_default.png"/></a>
+            </div>
+            <div class="col-md-8 list_con">
+                <p class="list_con_1">
+                    <i class="list_title">
+                        <a target="_blank" th:href="@{'company/'+${company['id']}(score=${company['score']})}"
+                           th:utext="${company['name']}"/>
+                    </i>
+                    <i class="list_status"><span th:utext="${#strings.defaultString(company['regStatus'],'未知')}"></span></i>
+                </p>
+                <div class="clear"></div>
+                <p class="list_con_2"><i class="list_name"><span th:utext="${company['legalPersonName']}"></span></i>
+                    <i class="list_date"><span th:text="${company['estiblishTime']}"></span></i><i
+                            class="list_amount"><span th:text="${company['regCapital']}"></span></i>
+                    <i class="list_type"><span th:utext="${company['industry']}"></span></i>
+                    <!--<i     class="list_people">2000人以上</i>-->
+                </p>
+                <p class="list_con_3"><i class="list_address"><span th:text="${company['base']}">北京市海淀区清河中街68号华润五彩城购物中心二期13楼</span></i>
+                </p>
+            </div>
+            <div class="col-md-2 list_score" th:if="${company['score']}!=null">
+                <em th:text="${company['score']}">94</em>
+                <i>整体评分</i>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container" style="text-align: center">
+    <ul class="pagination" id="companyPagination">
+        <li class="disabled"><a href="#">«</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+
+        <li><a href="#">»</a></li>
+    </ul>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(function () {
+        var keyword =/*[[${keyword}]]*/;
+        var pageCount =/*[[${entity['totalPage']}]]*/;
+        var currentPage = 1;// eval("(" + data + ")").CurrentPage; //得到urrentPage
+        var pagaContainer = $(".pagination");
+
+        for (var i = 1; i < pageCount; i++) {
+            pagaContainer.append(" <li><a href='javascript:void();'>" + (i + 1) + "</a></li>");
+        }
+        pagaContainer.append("<li><a href='javascript:void(0)'>»</a></li>");
+
+        var options = {
+            bootstrapMajorVersion: 3, //版本
+            currentPage: currentPage, //当前页数
+            totalPages: pageCount, //总页数
+            itemTexts: function (type, page, current) {
+                switch (type) {
+                    case "first":
+                        return "首页";
+                    case "prev":
+                        return "上一页";
+                    case "next":
+                        return "下一页";
+                    case "last":
+                        return "末页";
+                    case "page":
+                        return page;
+                }
+            },
+            onPageClicked: function (event, originalEvent, type, page) {
+                debugger
+                $.ajax({
+                    url: "/skynet/pageSearch?keyword=" + keyword + "&pageNum=" + page,
+                    datatype: 'json',
+                    type: "get",
+                    data: {},
+                    success: function (data) {
+                        debugger
+                        if (!data) return;
+                        var listContainer = $("#companyList");
+                        listContainer.empty();
+                        $.each(data, function (i, company) {
+                            if(company.type==1) {
+                                var dom =
+                                        '<div class="row">' +
+                                        '<div class="col-md-2 list_icon">' +
+                                        ' <a href="companydetail.html" target="_blank"><img src="images/company_default.png"/></a>' +
+                                        '</div>' +
+                                        '<div class="col-md-8 list_con">' +
+                                        '<p class="list_con_1">' +
+                                        '<i class="list_title">' +
+                                        '<a target="_blank" href="/skynet/company/' + company.id + '?score=' + company.score + '">' + company.name + '</a>' +
+                                        '</i>' +
+                                        '<i class="list_status">' + company.regStatus + '</i>' +
+                                        '</p>' +
+                                        '<div class="clear"></div>' +
+                                        '<p class="list_con_2"><i class="list_name">' + company.legalPersonName + '</i>' +
+                                        '<i class="list_date">' + company.estiblishTime + '</i>' +
+                                        '<i class="list_amount">' + company.regCapital + '</i>' +
+                                        '<i class="list_type">' + company.industry + '</i>' +
+                                        '</p>' +
+                                        '<p class="list_con_3"><i class="list_address">' + company.base + '</i>' +
+                                        '</p>' +
+                                        '</div>' +
+                                        '<div class="col-md-2 list_score">' +
+                                        '<em> ' + company.score + '</em>' +
+                                        '<i>整体评分</i>' +
+                                        '</div>' +
+                                        '</div> ';
+                                listContainer.append(dom);
+                            }
+                        });
+                    }
+                });
+            }
+        };
+        $('#companyPagination').bootstrapPaginator(options);
+    });
+
+    /*]]>*/
+</script>
+</body>
+</html>

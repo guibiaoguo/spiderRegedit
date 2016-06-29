@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>企业查询--企底</title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<section id="search">
+    <div class="intro">
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <h1 class="text-center heading m-b-lg text-white">
+                        企底查企，知己知彼
+                    </h1>
+
+                    <div class="col-md-9 col-md-offset-1">
+                        <div class="search-nav hidden-xs">
+                            <ul>
+                                <li class="search-type active">全部</li>
+                                <li class="search-type">企业名</li>
+                                <li class="search-type">法人/股东 </li>
+                                <li class="search-type">高管</li>
+                                <li class="search-type">品牌或产品 </li>
+                                <li class="search-type">地址 </li>
+                                <li class="search-type"> 经营范围 </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                        <form action="/skynet/search">
+                            <div class="input-group">
+                                <input type="text" value="" id="searchkey" autocomplete="off" placeholder="请输入企业名称、人名、产品名、注册号等" name="keyword" class="form-control input-lg" required="required"/>
+                                <input type="hidden" id="type" name="type" value="0"/>
+								 <span class="input-group-btn">
+                                  <input type="submit" class="button btn btn-danger btn-lg" value="查一下"/>
+                                  </span>
+                            </div>
+                        </form>
+
+                        <form action="/skynet/upload" >
+                            <div class="input-group">
+                                <input type="file" value="" id="filekey" autocomplete="off" placeholder="请上传你csv文件" name="keyword" class="form-control input-lg" required="required"/>
+								<span>上传符合格式的csv文件: </span>
+                                <span class="input-group-btn">
+                                  <input type="submit" class="button btn btn-danger btn-lg" value="批量查询"/>
+                                  </span>
+                            </div>
+                        </form>
+
+                        <section class="panel hidden-xs" id="search-list" style="display: none;">
+                        </section>
+                    </div>
+
+                    <div class="col-md-8 col-md-offset-2">
+                        <!--<p class="index-hot">热搜词：-->
+
+
+                            <!--<a class="index-hot-company" href="###" target="_blank">百度外卖</a>-->
+
+                            <!--<a class="index-hot-company" href="###" target="_blank">饿了么</a>-->
+
+                            <!--<a class="index-hot-company" href="###" target="_blank">大麦网</a>-->
+
+                            <!--<a class="index-hot-company" href="###" target="_blank">携程</a>-->
+
+                            <!--<a class="index-hot-company" href="###" target="_blank">支付宝</a>-->
+
+                            <!--<a class="index-hot-company" href="searchList.html" target="_blank">小米科技</a>-->
+
+                            <!--<a class="index-hot-company" href="###" target="_blank">高德地图</a>-->
+
+                        <!--</p>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container m-t-lg">
+    <div class="row items">
+
+        <div class="col-sm-3">
+            <div class="item">
+                <span>
+                    <img src="images/1.png" />
+                </span>
+                <span>
+                    <p>商标搜索</p>
+                    <i>商标是企业的一张脸</i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="item">
+                <span>
+                    <img src="images/2.png" />
+                </span>
+                <span>
+                    <p>失信搜索</p>
+                    <i>让老懒无处可逃</i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="item">
+                <span>
+                    <img src="images/3.png" />
+                </span>
+                <span>
+                    <p>专利搜索</p>
+                    <i>发明家都用它你试试</i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="item">
+                <span>
+                    <img src="images/4.png" />
+                </span>
+                <span>
+                    <p>关联搜索</p>
+                    <i>下一个福尔摩斯就是你</i>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

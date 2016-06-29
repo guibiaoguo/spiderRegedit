@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>详情</title>
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/companydetail.css" rel="stylesheet" type="text/css"/>
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="header">
+    <h3>企底</h3>
+</div>
+<div class="search_container">
+    <div class="row">
+        <div class="col-md-6 search_box">
+            <form action="/skynet/search">
+                <div class="input-group">
+                    <input type="text" value="" id="keyword" autocomplete="off" placeholder="请输入企业名称、人名、产品名、注册号等"
+                           name="keyword" class="form-control input-lg" required="required"/>
+                    <input type="hidden" id="type" name="type" value="0"/>
+                    <span class="input-group-btn">
+                        <input type="submit" class="button btn btn-danger btn-lg" value="查一下"/>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <!--<p class="index-hot">-->
+
+                <!--<a class="index-hot-company" href="###" target="_blank">百度外卖</a>-->
+
+                <!--<a class="index-hot-company" href="###" target="_blank">饿了么</a>-->
+
+                <!--<a class="index-hot-company" href="###" target="_blank">大麦网</a>-->
+
+                <!--<a class="index-hot-company" href="###" target="_blank">大麦网</a>-->
+
+            <!--</p>-->
+        </div>
+    </div>
+</div>
+<div class="list_container">
+    <div class="list">
+        <div class="row">
+            <div class="col-md-2 list_icon">
+                <img
+                     th:src="(${not #lists.isEmpty(['tmList'])})?${['tmList'][0]['url']}:('../images/company_default.png')"/>
+            </div>
+            <div class="col-md-8 list_con" th:object="${['baseInfo']}">
+                <p class="list_con_1">
+                    <i class="list_title"><span th:text="*{['name']}"></span></i>
+                    <i class="list_status"><span th:text="*{['regStatus']}">在业</span></i>
+                    <i class="list_quality">优质客户</i></p>
+                <div class="clear"></div>
+                <p class="list_con_2"><i class="list_name"><span th:text="*{['legalPersonName']}">雷军</span>
+                </i><i class="list_date"><span   yay:Date="*{['estiblishTime']}">2006-03-03</span></i>
+                    <i class="list_amount"><span th:text="*{['regCapital']}">5000万元人民币</span></i>
+                    <i class="list_type"><span th:text="*{['industry']}">互联网</span></i>
+                    <!--&lt;!&ndash;<i class="list_people">2000人以上</i>-->
+                </p>
+                <p class="list_con_3"><i class="list_address">
+                    <span th:text="*{['regLocation']}">北京市海淀区清河中街68号华润五彩城购物中心二期13楼</span>
+                </i></p>
+                <div class="list_btn">
+                    <span class="list_btn_1"></span>
+                    <span class="list_btn_2"></span>
+                    <span class="list_btn_3">认证企业</span>
+                </div>
+            </div>
+            <div class="col-md-2 list_score">
+                <div class="round">
+                    <em th:text="${param.score[0]}" th:unless="${param.score == null}">94</em>
+                    <em th:if="${param.score == null}">无</em>
+                    <i>整体评分</i>
+                </div>
+                <div class="reflesh"><i class="reflesh_btn"></i>一天前更新数据</div>
+            </div>
+        </div>
+    </div>
+    <div class="chart_img">
+        <div class="row">
+            <div class="col-md-12">
+                <!--<img src="../images/charts.png"/>-->
+            </div>
+        </div>
+    </div>
+    <div class="tabbable search-nav ">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#baseInfo" data-toggle="tab">基本信息</a>
+            </li>
+            <li>
+                <a href="#renzhirenyuan" data-toggle="tab">任职人员</a>
+            </li>
+            <li>
+                <a href="#gudongxinxi" data-toggle="tab">股东信息</a>
+            </li>
+            <li>
+                <a href="#duiwaitouzi" data-toggle="tab">对外投资</a>
+            </li>
+            <li>
+                <a href="#falvsusong" data-toggle="tab">法律诉讼</a>
+            </li>
+            <li>
+                <a href="#qiyenianbao" data-toggle="tab">企业年报</a>
+            </li>
+            <li>
+                <a href="#fenzhijigou" data-toggle="tab">分支机构</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="baseInfo" th:if="${['baseInfo']}!=null">
+                <table class="table table-hover table-striped">
+                    <tbody th:object="${['baseInfo']}">
+                    <tr th:if="*{[regNumber]}">
+                        <td>注册号</td>
+                        <td th:text="*{[regNumber]}"></td>
+                    </tr>
+                    <!--<tr th:if="${#maps.containsKey(${['baseInfo']},orgNumber)}">-->
+                    <!--<td>组织机构代码</td>-->
+                    <!--<td th:text="*{[orgNumber]}"></td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td>经营状态</td>
+                        <td th:text="*{[regStatus]}"></td>
+                    </tr>
+                    <tr>
+                        <td>企业类型</td>
+                        <td th:text="*{[companyOrgType]}"></td>
+                    </tr>
+                    <tr>
+                        <td>成立日期</td>
+                        <td><span  yay:Date="*{['estiblishTime']}">2006-03-03</span></td>
+                    </tr>
+                    <tr>
+                        <td>法定代表</td>
+                        <td th:text="*{[legalPersonName]}"></td>
+                    </tr>
+                    <tr>
+                        <td>注册资本</td>
+                        <td th:text="*{[regCapital]}"></td>
+                    </tr>
+                    <tr>
+                        <td>营业期限</td>
+                        <td ><span yay:Date="*{[fromTime]}"></span>~无固定期限</td>
+                    </tr>
+                    <tr>
+                        <td>登记机关</td>
+                        <td th:text="*{[regInstitute]}"></td>
+                    </tr>
+                    <tr>
+                        <td>发照日期</td>
+                        <td><span   yay:Date="*{['estiblishTime']}">2006-03-03</span></td>
+                    </tr>
+                    <tr>
+                        <td>所属行业</td>
+                        <td th:text="*{[industry]}"></td>
+                    </tr>
+                    <tr>
+                        <td>所在地区</td>
+                        <td th:text="*{[base]}"></td>
+                    </tr>
+                    <tr>
+                        <td>注册地址</td>
+                        <td th:text="*{[regLocation]}"></td>
+                    </tr>
+                    <tr>
+                        <td>经营范围</td>
+                        <td th:text="*{[businessScope]}"></td>
+                    </tr>
+                    <tr>
+                        <td>商标信息</td>
+                        <td>
+                            <img th:each="item,c:${[tmList]}" style="width:60px;height:60px;" th:src="${item.url}" th:if="${c.index} &lt; 5"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="renzhirenyuan">
+                <table class="table table-hover ">
+                    <thead>
+                    <th>姓名</th>
+                    <th>职位</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="staff : ${['staffList']}">
+                        <td th:text="${staff['name']}">
+                        </td>
+                        <td th:if="${staff['typeJoin']}!=null" th:text="${staff['typeJoin']}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="gudongxinxi">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <th>名称</th>
+                    <th>投资数额(万元）</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="investor:${['investorList']}">
+                        <td th:text="${investor['name']}">
+                        </td>
+                        <td th:text="${(investor['amount']==0)?'未公开':investor['amount']}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="duiwaitouzi">
+                <div>
+                    <ul>
+                        <li th:each="item:${investList}">
+                            <h4><a yay:href="${item['id']}" th:text="${item['name']}" target="_blank"/></h4>
+                            投资数额： <span th:text="${(item['amount']==0)?'未公开':item['amount']+'万元人民币'}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane" id="falvsusong">
+                <div>
+                    <ul>
+                        <li th:each="item:${lawSuitList}">
+                            <h4 th:text="${item['caseno']}"></h4>
+                            <span th:text="${item['court']}"></span><br/>
+                            <span th:text="${item['doctype']}"></span><br/>
+                                    <span>
+                                        <a th:href="${item['url']}" th:text="${item['title']}" target="_blank"></a>
+                                    </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane" id="qiyenianbao">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                    <tr th:each=" item:${['annuRepYearList']}">
+                        <td >
+                            <a th:href="@{/annualReport/{id}(id=${item.id})}" th:text="${item['reportYear']+'年度报告'}" target="_blank"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="fenzhijigou">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                    <tr th:each="item:${['branchList']}">
+                        <td>
+                            <h4><a yay:href="${item['id']}" th:text="${item['name']}" target="_blank"/></h4>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function (e) {
+        });
+    });
+    /*]]>*/
+</script>
+</body>
+</html>

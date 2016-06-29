@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SpiderMapper">
+    <insert id="creatTableAndInsert" parameterType="java.util.Map" statementType="STATEMENT">
+        create table if not exists ${tablename}
+        <foreach collection="keys" item="k" index="index" open="(" separator="," close=");">
+            ${k} varchar(30) not null
+        </foreach>
+        insert into ${tablename}
+        <foreach collection="keys" item="k" index="index" open="(" separator="," close=")">
+            ${k}
+        </foreach>
+        values
+        <foreach collection="keys" item="k" index="index" open="(" separator="," close=")">
+            '${params[k]}'
+        </foreach>
+    </insert>
+    <select id="selectQCCCookies" resultType="hashMap">
+SELECT cookie FROM  cookie WHERE STATUS=0 ORDER BY update_time DESC limit 1
+    </select>
+</mapper>

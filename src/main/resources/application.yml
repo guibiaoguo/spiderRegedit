@@ -1,0 +1,53 @@
+spring:
+    thymeleaf:
+        cache: false
+    dataSource:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1/spider_regedit?characterEncoding=utf-8
+      username: root
+      password: root
+    multipart:
+      maxFileSize: 100000000
+      maxRequestSize: 100000000
+    spiderDataSource:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1/spider_alydatatest?characterEncoding=utf-8&useServerPrepStmts=false&rewriteBatchedStatements=true
+      username: root
+      password: root
+    secondary:
+      url: jdbc:mysql://127.0.0.1:3306/spider?characterEncoding=utf-8&autoReconnect=true
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLDialect
+      hbm2ddl.auto: update
+      show_sql: true
+
+    redis:
+      timeOut: 100000
+      #host: 10.1.20.31
+      host: 127.0.0.1
+      port: 6379
+      pool:
+        max-idle: 100
+        min-idle: 1
+        max-active: 8
+        max-wait: 1000
+#database
+
+mybatis:
+   config: classpath:mybatis-config.xml
+   executor-type: batch
+spider:
+    url: http://localhost:8080/spider/regedit
+    jobUrl: /job/spider
+    linkUrl: http://localhost:8080/spider/getlinks
+    saveUrl: http://localhost:8080/spider/save
+    spkey: 1234567
+    captchaPath: d:/captcha
+    downPath: d:/1231
+    data:
+      password: 1234567
+      path: d:/1231
+      back: d:/back
